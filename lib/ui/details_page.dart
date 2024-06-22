@@ -31,19 +31,38 @@ class _DetailsPageState extends State<DetailsPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        Get.back();
-                      },
-                      child: const Icon(Icons.arrow_back,color: Colors.white,size: 30,),
-                    ),
-                    const SizedBox(width: 10,),
-                    Text(Get.arguments['trackingNumber'],style: Extras.getBoldFont().copyWith(fontSize: 25),)
-                  ],
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 70,
+                decoration: const BoxDecoration(
+                  color: Colors.black54
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: (){
+                          Get.back();
+                        },
+                        child: const Icon(Icons.arrow_back,color: Colors.white,size: 30,),
+                      ),
+                      const SizedBox(width: 10,),
+                      Text(Get.arguments['trackingNumber'],style: Extras.getBoldFont().copyWith(fontSize: 25),),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Extras.getCountryFlag("CA"),
+                          const SizedBox(width: 5,),
+                          const Icon(Icons.double_arrow),
+                          const SizedBox(width: 5,),
+                          Extras.getCountryFlag("DZ"),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               BlocBuilder<TrackingCubit2,TrackingStates>(

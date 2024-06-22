@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/src/painting/text_style.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
@@ -31,5 +32,12 @@ class Extras {
   static Color hexToColor(String code) {
     return  Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
   }
-
+  static CountryFlag getCountryFlag(String countryCode){
+    return CountryFlag.fromCountryCode(
+      countryCode,
+      width: 25,
+      height: 25,
+      shape: const Circle(),
+    );
+  }
 }

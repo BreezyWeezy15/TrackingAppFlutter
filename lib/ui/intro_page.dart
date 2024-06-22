@@ -13,13 +13,13 @@ class IntroPage extends StatefulWidget {
 class _IntroPageState extends State<IntroPage> {
   final PageController _pageController = PageController();
   final List<String> _images = [
-    "assets/images/device.png",
-    "assets/images/device.png",
-    "assets/images/device.png",
+    "assets/images/purchase.png",
+    "assets/images/number.png",
+    "assets/images/shipment.png",
   ];
   final List<String> _titles = [
     "Buy An Item",
-    "Tracking Code",
+    "Tracking Number",
     "Track Shipment"
   ];
   final List<String> _description = [

@@ -263,11 +263,11 @@ class _TrackPageState extends State<TrackPage> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          getCountryFlag(data[index]!.origin!),
+                                          Extras.getCountryFlag(data[index]!.origin!),
                                           const SizedBox(width: 5,),
                                           const Icon(Icons.double_arrow),
                                           const SizedBox(width: 5,),
-                                          getCountryFlag(data[index]!.destination!),
+                                          Extras.getCountryFlag(data[index]!.destination!),
                                         ],
                                       ),
                                     ),
@@ -295,13 +295,6 @@ class _TrackPageState extends State<TrackPage> {
     ),);
   }
 
-  CountryFlag getCountryFlag(String countryCode){
-    return CountryFlag.fromCountryCode(
-      countryCode,
-      width: 25,
-      height: 25,
-      shape: const Circle(),
-    );
-  }
+
 }
 
