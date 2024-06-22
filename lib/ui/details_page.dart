@@ -54,26 +54,42 @@ class _DetailsPageState extends State<DetailsPage> {
                       child: const Center(child: CircularProgressIndicator(),),
                     );
                   }
+                  else if(state is Error){
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height / 1.2,
+                      child:  Center(child: Text("No Data Found", style:
+                      Extras.getBoldFont().copyWith(fontSize: 35))),
+                    );
+                  }
                   else if(state is Success){
                     var data = state.trackingModel?.data?.trackings![0].events;
-                    return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: AnotherStepper(
-                          stepperList: List.generate(data!.length, (index){
-                            return StepperData(
-                                title: StepperText(data[index].status!,
-                                textStyle: Extras.getBoldFont().copyWith(fontSize: 17)),
-                                subtitle: data[index].location == null ?
-                                StepperText("${data[index].sourceCode!}\n${formatDate( data[index].occurrenceDatetime!)}",
-                                    textStyle: Extras.getMediumFont().copyWith(fontSize: 14)) :
-                                StepperText("${data[index].sourceCode!}\n${data[index].location!}",
-                                textStyle: Extras.getMediumFont().copyWith(fontSize: 14)),
-                                iconWidget: Image.asset("assets/images/package.png",width: 30,height: 35,
-                                color: Colors.white,)
-                            );
-                          }),
-                          stepperDirection: Axis.vertical),
-                    );
+                    if(data!.isNotEmpty){
+                      return Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: AnotherStepper(
+                            stepperList: List.generate(data!.length, (index){
+                              return StepperData(
+                                  title: StepperText(data[index].status!,
+                                      textStyle: Extras.getBoldFont().copyWith(fontSize: 17)),
+                                  subtitle: data[index].location == null ?
+                                  StepperText("${data[index].sourceCode!}\n${formatDate( data[index].occurrenceDatetime!)}",
+                                      textStyle: Extras.getMediumFont().copyWith(fontSize: 14)) :
+                                  StepperText("${data[index].sourceCode!}\n${data[index].location!}",
+                                      textStyle: Extras.getMediumFont().copyWith(fontSize: 14)),
+                                  iconWidget: Image.asset("assets/images/package.png",width: 30,height: 35,
+                                    color: Colors.white,)
+                              );
+                            }),
+                            stepperDirection: Axis.vertical),
+                      );
+                    } else {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 1.2,
+                        child:  Center(child: Text("No Data Found", style: Extras.getBoldFont().copyWith(fontSize: 35)),),
+                      );
+                    }
                   }
                   return SizedBox(
                     width: MediaQuery.of(context).size.width,

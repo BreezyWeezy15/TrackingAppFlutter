@@ -51,6 +51,24 @@ class _TrackPageState extends State<TrackPage> {
               print("Failed to get data");
             }
           }
+          else if (state is DeleteTrackingHistory){
+            int result = state.result;
+            if(result >= 1){
+              Fluttertoast.showToast(msg: "Tracking History Delete Successfully");
+              BlocProvider.of<TrackingCubit>(context).getAllShipments();
+            } else {
+              Fluttertoast.showToast(msg: "Could not delete Tracking History");
+              BlocProvider.of<TrackingCubit>(context).getAllShipments();
+            }
+          }
+          else if (state is DeletePackageState){
+             int result = state.result;
+             if(result == 1){
+               Fluttertoast.showToast(msg: 'Package Successfully Erased');
+             } else {
+               Fluttertoast.showToast(msg: "Failed To Erase Item");
+             }
+          }
         },
     child: SafeArea(
       child: Scaffold(
@@ -142,6 +160,38 @@ class _TrackPageState extends State<TrackPage> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20,right: 20,top: 40,bottom: 30),
+                child: Row(
+                  children: [
+                    Expanded(child: Text("Tracking History",style: Extras.getBoldFont().copyWith(fontSize: 20,
+                        color: Colors.white),)),
+                    GestureDetector(
+                      onTap: (){
+                          showDialog(
+                              context: context,
+                              builder: (context){
+                                return AlertDialog(
+                                  title: Text("Erase History",style: Extras.getMediumFont(),),
+                                  content: Text("Do you want to delete tracking history?",
+                                  style: Extras.getMediumFont(),),
+                                  actions: [
+                                    ElevatedButton(onPressed: () {
+                                       BlocProvider.of<TrackingCubit>(context).deleteTrackingHistory();
+                                       Navigator.pop(context);
+                                    }, child: Text("Erase",style: Extras.getBoldFont(),)),
+                                    ElevatedButton(onPressed: (){
+                                      Navigator.pop(context);
+                                    }, child: Text("Cancel",style: Extras.getBoldFont(),))
+                                  ],
+                                );
+                              });
+                      },
+                      child: const Icon(Icons.delete_outline_sharp),
+                    )
+                  ],
+                ),
+              ),
               BlocBuilder<TrackingCubit,TrackingStates>(
                   builder: (context,state){
                     if(state is Loading){
@@ -175,7 +225,12 @@ class _TrackPageState extends State<TrackPage> {
                                   "trackingNumber" : data[index]?.trackingCode
                                 });
                               },
-                              child: Card(
+                              child: Dismissible(
+                                key: UniqueKey(),
+                                direction: DismissDirection.startToEnd,
+                                onDismissed: (direction){
+                                   BlocProvider.of<TrackingCubit>(context).deletePackage(data[index]!.id);
+                                }, child: Card(
                                 margin: const EdgeInsets.all(15),
                                 child: Row(
                                   children: [
@@ -216,6 +271,7 @@ class _TrackPageState extends State<TrackPage> {
                                     ),
                                   ],
                                 ),
+                              ),
                               ),
                             );
                           },

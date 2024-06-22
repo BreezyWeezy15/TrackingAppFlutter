@@ -41,5 +41,13 @@ class ApiService {
   Future<int> saveShipment(TrackingCompanion companion) async {
     return await shipmentDatabase.saveShipment(companion);
   }
-
+  Future<int> deleteShipment(int id) async {
+    return await shipmentDatabase.deleteShipment(id);
+  }
+  Future<int> deleteAllShipments() async {
+    return await shipmentDatabase.deleteAllShipments();
+  }
+  Future<int> updateShipment(TrackingCompanion companion) async {
+    return await shipmentDatabase.updateShipment(companion);
+  }
 }

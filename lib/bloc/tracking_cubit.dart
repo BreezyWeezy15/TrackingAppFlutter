@@ -40,5 +40,13 @@ class TrackingCubit extends Cubit<TrackingStates> {
      var result = await apiService.saveShipment(trackingData);
      emit(SaveShipmentState(result));
   }
+  deleteTrackingHistory() async {
+     int result = await apiService.deleteAllShipments();
+     emit(DeleteTrackingHistory(result));
+  }
+  deletePackage(int packageID) async {
+     int result = await apiService.deleteShipment(packageID);
+     emit(DeletePackageState(result));
+  }
 
 }

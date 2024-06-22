@@ -23,3 +23,11 @@ class SaveShipmentState extends TrackingStates {
    int result;
    SaveShipmentState(this.result);
 }
+class DeleteTrackingHistory extends TrackingStates {
+   int result;
+   DeleteTrackingHistory(this.result);
+}
+class DeletePackageState extends TrackingStates {
+  int result;
+  DeletePackageState(this.result);
+}
