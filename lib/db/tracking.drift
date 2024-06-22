@@ -1,0 +1,9 @@
+
+CREATE TABLE tracking (
+    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    trackingCode TEXT,
+    packageName TEXT,
+    origin TEXT,
+    destination TEXT,
+    statusMileStone TEXT
+);
