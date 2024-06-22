@@ -2,6 +2,7 @@ import 'package:another_stepper/another_stepper.dart';
 import 'package:another_stepper/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tracking_app/bloc/tracking_cubit.dart';
@@ -51,7 +52,9 @@ class _DetailsPageState extends State<DetailsPage> {
                     return SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 1.2,
-                      child: const Center(child: CircularProgressIndicator(),),
+                      child: const Center(
+                        child: SpinKitFadingFour(size: 40,color: Colors.white,),
+                      ),
                     );
                   }
                   else if(state is Error){
@@ -94,7 +97,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   return SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 1.2,
-                    child: const Center(child: CircularProgressIndicator(),),
+                    child:  Center(child: Text("No Data Found", style: Extras.getBoldFont().copyWith(fontSize: 35)),),
                   );
                 },
               )

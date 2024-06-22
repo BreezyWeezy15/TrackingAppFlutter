@@ -3,6 +3,7 @@ import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart' hide Value;
 import 'package:get/get_core/src/get_main.dart';
@@ -65,6 +66,7 @@ class _TrackPageState extends State<TrackPage> {
              int result = state.result;
              if(result == 1){
                Fluttertoast.showToast(msg: 'Package Successfully Erased');
+               BlocProvider.of<TrackingCubit>(context).getAllShipments();
              } else {
                Fluttertoast.showToast(msg: "Failed To Erase Item");
              }
@@ -198,8 +200,8 @@ class _TrackPageState extends State<TrackPage> {
                       return SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 2,
-                        child: const Center(
-                          child: CircularProgressIndicator(color: Colors.white,),
+                        child:  const Center(
+                          child: SpinKitFadingFour(size: 40,color: Colors.white,),
                         ),
                       );
                     }
